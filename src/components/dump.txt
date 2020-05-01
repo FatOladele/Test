@@ -1,0 +1,48 @@
+computed: {
+    comp () {
+      var list = store.state.opponent
+      var player = this.player.id
+      console.log('i got here')
+      var orgList = []
+      var cnt = 0
+      player = player + 1
+      while (cnt < list.length) {
+        if (player > 5) {
+          player = 1
+        }
+        if (list[cnt].id === player) {
+          orgList.push(list[cnt])
+          player = player + 1
+          cnt = cnt + 1
+        }
+      }
+      return orgList
+    }
+  }
+
+
+  created: {
+    boardclass (bkey) {
+      const TW = ['A1', 'A8', 'A15', 'H1', 'H15', 'O1', 'O8', 'O15']
+      const DW = ['B2', 'C3', 'D4', 'E5', 'H8', 'K11', 'L12', 'M13', 'N14', 'B14', 'C13', 'D12', 'E11', 'K5', 'L4', 'M3', 'N2']
+      const DL = ['A4', 'A12', 'C7', 'C10', 'D1', 'D8', 'D15', 'G2', 'G7', 'G9', 'G13', 'H3', 'H12', 'I2', 'I7', 'I9', 'I13', 'L1', 'L8', 'L15', 'M7', 'M9', 'O4', 'O12']
+      const TL = ['B6', 'B10', 'F2', 'F6', 'F10', 'F14', 'J2', 'J6', 'J10', 'J14', 'N6', 'N10']
+      if (bkey in TW) {
+        return 'TW'
+      } else if (bkey in DW) {
+        return 'DW'
+      } else if (bkey in DL) {
+        return 'DL'
+      } else if (bkey in TL) {
+        return 'TL'
+      } else {
+        return 'odinary'
+      }
+    }
+  },
+
+
+
+  playedWords: [{ id: 1, words: [[112, 111, 114]] }, { id: 2, words: [[116, 111, 114, 115]] }, { id: 3, words: [[112, 115, 115]] }, { id: 4, words: [[112, 115, 114]] }],
+    activities: ['Ola played', 'Omo wobe probed wrongly', 'Paul swapped 3 tiles', 'Omo wobe skipped turn for wrong probe', 'computer passed', 'Ola swapped 4 letters', 'Paul played', 'Omo wobe played', 'Computer played'],
+    
