@@ -5,7 +5,7 @@
         Click slot to Toggle between Human, Computer, and None
       </div>
       <div>
-        <span>GAME ID: {{gameId}}</span><span>TIME: {{setting['time']}}Seconds</span><span>RULES: {{setting['rules']}}</span>
+        <span>GAME ID: {{gameId}}</span><span>TIME: {{setting['time']}}Seconds</span><span>RULES: {{setting['rules']}}</span><span v-if="oa"> OBSERVERS: Allowed</span><span v-else> OBSERVERS: Not Allowed</span>
       </div>
       <div class = 'mbox' >
         <div class = 'boxi'>
@@ -112,17 +112,23 @@
       </div>
       <div v-else>
         <button @click="leaveroom">Leave Game</button>
-        <button v-if="isReady !== 'Ready'" @click = 'playerready'>Ready</button>
+        <button v-if="isReady !== 'Ready' && isPlayer==='player'" @click = 'playerready'>Ready</button>
       </div>
+    </div>
+    <br>
+    <div class="observe">
+      <observers/>
     </div>
   </div>
 </template>
 
 <script>
 import store from '../store/index'
+import observers from '@/components/observers.vue'
 export default {
   name: 'wroom',
   components: {
+    observers
   },
   computed: {
     slot () {
@@ -136,7 +142,9 @@ export default {
       gamerNick: store.state.gamernick,
       gameId: store.state.gameId,
       setting: store.state.settings,
-      isReady: 'Click Ready'
+      isReady: 'Click Ready',
+      isPlayer: store.state.gtype,
+      oa: store.state.oa
     }
   },
   created () {
@@ -205,6 +213,11 @@ export default {
 *{
   margin: 10px;
 }
+.observe {
+  padding: 10px;
+  margin: auto;
+  border: 10px;
+}
 .mbox{
   display: inline-flex;
   align-items: center;
@@ -216,8 +229,9 @@ export default {
   padding: 5px;
   background-color: rgba(134, 124, 124, 0.212);
   width: 1000px;
-  height: 400px;
-  margin: auto
+  max-height: 500px;
+  margin: auto;
+  display: block
 }
 .boxi{
   width: 25%;

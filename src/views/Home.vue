@@ -20,7 +20,6 @@ export default {
     }
   },
   created () {
-    console.log('i got here')
     store.dispatch('setDefaultState')
   }
 }

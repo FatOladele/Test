@@ -6,6 +6,9 @@
     <div class = 'info'>
       <info/>
     </div>
+    <footer>
+      <observers/>
+    </footer>
   </div>
 </template>
 
@@ -13,11 +16,15 @@
 // @ is an alias to /src
 import room from '@/components/playroom.vue'
 import info from '@/components/Info.vue'
+import observers from '@/components/observers.vue'
 export default {
   name: 'game',
+  computed: {
+  },
   components: {
     room,
-    info
+    info,
+    observers
   }
 }
 </script>

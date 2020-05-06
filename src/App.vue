@@ -29,6 +29,11 @@ export default {
     isConnected () {
       return store.state.connection
     }
+  },
+  mounted () {
+    // var externalScript = document.createElement('script')
+    // externalScript.setAttribute('src', './src/assets/js/DragDropTouch.js')
+    // document.head.appendChild(externalScript)
   }
 }
 </script>
