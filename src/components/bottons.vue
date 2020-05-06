@@ -12,7 +12,7 @@
         </button>
       </Span>
       <Span>
-        <button >
+        <button @click.prevent = "pass">
           PASS
         </button>
       </Span>
@@ -23,9 +23,9 @@
       </Span>
     </div>
     <div v-if = "msg !== ''"> {{msg}} </div>
-    <div v-if = "playedwords.length !== 0">
+    <!-- <div v-if = "playedwords.length !== 0">
       <p v-for = "i in playedwords.length" :key ='i' >{{playedwords[i - 1]}}</p>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -48,7 +48,7 @@ export default {
   data () {
     return {
       msg: '',
-      playedwords: [],
+      // playedwords: [],
       pwt: store.getters.noT,
       played: 'disabled',
       bag: store.state.bag
@@ -56,25 +56,35 @@ export default {
   },
   methods: {
     play () {
-      console.log(store.state.tonboard)
-      const payload = { board: store.state.boardl, tiles: store.state.tonboard }
-      const path = 'http://localhost:5000/api/played'
-      axios.post(path, payload).then((res) => {
-        if (res.data.status === 'failed') {
-          this.msg = res.data.msg
-        } else {
-          this.msg = 'You Played'
-          this.playedwords = res.data.words
-        }
-      }).catch((error) => {
-        console.log(error)
-      })
+      if (Object.keys(store.state.tonboard).length > 0) {
+        const payload = { board: store.state.boardl, tiles: store.state.tonboard }
+        const path = this.$myhost + '/api/played'
+        axios.post(path, payload).then((res) => {
+          if (res.data.status === 'failed') {
+            this.msg = res.data.msg
+          } else {
+            this.msg = 'You Played'
+            const gdata = { gamer: store.state.gamernick, room: store.state.gameId, tiles: store.state.tonboard, pwords: res.data.words, score: res.data.score }
+            this.$socket.emit('played_game', gdata)
+            store.dispatch('playtilea')
+            // this.playedwords = res.data.words
+          }
+        }).catch((error) => {
+          console.log(error)
+        })
+      } else {
+        this.msg = 'You have not played'
+      }
     },
     onClear (event) {
       this.$emit('clicked')
     },
     toswap () {
       this.$emit('swapb')
+    },
+    pass () {
+      const gdata = { gamer: store.state.gamernick, room: store.state.gameId }
+      this.$socket.emit('passed', gdata)
     }
   }
 }

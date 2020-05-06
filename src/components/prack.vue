@@ -4,21 +4,21 @@
       <tr>
         <td>
           <rslot id ="slot-1">
-            <letter id = "letter-1" v-if ="letter.length > 0" :letcode = "'L' + letter[0]" draggable="true" >
+            <letter lid = "letter-1" v-if ="letter.length > 0" :letcode = "'L' + letter[0]" draggable="true" >
               <!-- nothing -->
             </letter>
           </rslot>
         </td>
         <td>
           <rslot id ="slot-2">
-            <letter id = "letter-2" v-if ="letter.length > 1" :letcode = "'L' + letter[1]" draggable="true" >
+            <letter lid = "letter-2" v-if ="letter.length > 1" :letcode = "'L' + letter[1]" draggable="true" >
               <!-- nothing -->
             </letter>
           </rslot>
         </td>
         <td>
           <rslot id ="slot-3">
-            <letter id = "letter-3" v-if ="letter.length > 2" :letcode = "'L' + letter[2]" draggable="true" >
+            <letter lid = "letter-3" v-if ="letter.length > 2" :letcode = "'L' + letter[2]" draggable="true" >
               <!-- nothing -->
             </letter>
           </rslot>
@@ -32,7 +32,7 @@
         </td>
         <td>
           <rslot id ="slot-5">
-            <letter id = "letter-5" v-if ="letter.length > 4" :letcode = "'L' + letter[4]" draggable="true" >
+            <letter lid = "letter-5" v-if ="letter.length > 4" :letcode = "'L' + letter[4]" draggable="true" >
               <!-- nothing -->
             </letter>
           </rslot>
@@ -40,14 +40,14 @@
         <td>
           <rslot id ="slot-6">
             <!-- nothing -->
-            <letter id = "letter-6" v-if ="letter.length > 5" :letcode = "'L' + letter[5]" draggable="true" >
+            <letter lid = "letter-6" v-if ="letter.length > 5" :letcode = "'L' + letter[5]" draggable="true" >
               <!-- nothing -->
             </letter>
           </rslot>
         </td>
         <td>
           <rslot id ="slot-7">
-            <letter id = "letter-7" v-if ="letter.length > 6" :letcode = "'L' + letter[6]" draggable="true" >
+            <letter lid = "letter-7" v-if ="letter.length > 6" :letcode = "'L' + letter[6]" draggable="true" >
               <!-- nothing -->
             </letter>
           </rslot>
@@ -66,7 +66,7 @@ export default {
   name: 'prack',
   computed: {
     letter () {
-      return store.state.rack
+      return store.getters.getrack
     }
   },
   data () {

@@ -5,9 +5,9 @@
         <td>
           <P>{{nickn}}</P>
           <P>({{id}})</P>
-          <div v-if = "turn === id">
-            <p v-if = "id === pid">Your Turn</p>
-            <p v-if = "id !== pid">Thinking...</p>
+          <div v-if = "turn == id">
+            <p v-if = "id == pid">Your Turn</p>
+            <p v-if = "id != pid">Thinking...</p>
           </div>
         </td>
       </tr>
@@ -19,6 +19,11 @@
 import store from '../store/index'
 export default {
   props: ['id', 'nick'],
+  computed: {
+    turn () {
+      return store.getters.getturn
+    }
+  },
   data () {
     return {
       colourcode: {
@@ -28,8 +33,7 @@ export default {
         4: 'r'
       },
       pid: store.state.player.id,
-      nickn: this.nick,
-      turn: store.state.turn
+      nickn: this.nick
     }
   }
 }

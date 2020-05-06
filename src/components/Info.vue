@@ -73,7 +73,7 @@
         </table>
       </div>
     </div>
-    <div :class = "colourcode[player.id]">
+    <div v-if="isPlayer === 'player'" :class = "colourcode[player.id]">
       <span>
         Score: {{player.score}}
       </span>
@@ -111,6 +111,12 @@ export default {
   computed: {
     cbag () {
       return store.getters.baggetters
+    },
+    activities () {
+      return store.getters.actgetters
+    },
+    wordsplayed () {
+      return store.getters.getwords
     }
   },
   data () {
@@ -121,14 +127,12 @@ export default {
         3: 'b',
         4: 'r'
       },
-      wordsplayed: store.state.playedWords,
       opponents: store.state.opponent,
       player: store.state.player,
-      bag: store.getters.baggetters,
       cbt: store.getters.getPtime,
       cdt: 580,
       turn: store.state.turn,
-      activities: store.state.activities
+      isPlayer: store.state.gtype
     }
   }
 }

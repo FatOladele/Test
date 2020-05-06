@@ -11,15 +11,18 @@
           <vrack v-if = 'onick.length > 0' :col = 'colourcode[opponent[onick[0]]["id"]]'></vrack>
         </td>
         <td class = "board">
-          <board/>
+          <board></board>
         </td>
         <td class ="vrack">
           <vrack v-if = 'onick.length > 2' :col = 'colourcode[opponent[onick[2]]["id"]]'></vrack>
         </td>
       </tr>
       <tr>
-        <td colspan="3" class = "hrack">
+        <td v-if= "isPlayer === 'player'" colspan="3" class = "hrack">
           <prack :col = 'colourcode[player["id"]]'></prack>
+        </td>
+        <td v-else colspan="3" class = "hrack">
+          <hrack v-if = 'onick.length > 3' :col = 'colourcode[opponent[onick[3]]["id"]]'></hrack>
         </td>
       </tr>
     </table>
@@ -50,7 +53,9 @@ export default {
       },
       onick: Object.keys(store.state.opponent),
       opponent: store.state.opponent,
-      player: store.state.player
+      player: store.state.player,
+      board: store.getters.getboard,
+      isPlayer: store.state.gtype
     }
   }
 }

@@ -20,15 +20,14 @@ import store from '../store/index'
 import bletter from './bletter.vue'
 export default {
   name: 'Board',
-  computed: {
-    boardc () {
-      console.log(store.state.boardl)
-      return store.state.boardl
-    }
-  },
   components: {
     bslot,
     bletter
+  },
+  computed: {
+    letonboard () {
+      return store.getters.getboard
+    }
   },
   data () {
     return {
@@ -58,8 +57,8 @@ export default {
         3: 'b',
         4: 'r',
         5: 'p'
-      },
-      letonboard: store.state.boardl
+      }
+      // letonboard: store.getters.getboard
     }
   },
   method: {
@@ -106,5 +105,9 @@ export default {
   }
   #B2, #C3, #D4, #E5, #H8, #K11, #L12, #M13, #N14, #B14, #C13, #D12, #E11, #K5, #L4, #M3, #N2{
     background-color: orange;
+  }
+  #H8 {
+    background-image: url("../assets/Alphabet/ST.png");
+    background-repeat: no-repeat;
   }
 </style>
